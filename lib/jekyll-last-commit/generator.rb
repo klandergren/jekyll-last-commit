@@ -12,10 +12,22 @@ module JekyllLastCommit
       date_format = site.config.dig('jekyll-last-commit', 'date-format')
       date_format ||= '%B %d, %Y'
 
+      fallback_to_mtime = site.config.dig('jekyll-last-commit', 'fallback-to-mtime')
+      fallback_to_mtime = fallback_to_mtime.nil? ? true : false
+
       site.documents.each do |document|
         commit = repo_man.find_commit(document.relative_path)
 
-        unless commit.nil?
+        if commit.nil?
+          if fallback_to_mtime
+            path_document = Jekyll.sanitized_path(site.source, document.relative_path)
+
+            if File.file?(path_document)
+              Jekyll.logger.warn "JekyllLastCommit: unable to find commit information for #{document.relative_path}. falling back to `mtime` for last_modified_at"
+              document.data['last_modified_at'] = Time.at(File.mtime(path_document).to_i)
+            end
+          end
+        else
           raw_time = Time.at(commit["time"].to_i)
 
           document.data['last_commit'] = commit
@@ -27,7 +39,16 @@ module JekyllLastCommit
       site.pages.each do |page|
         commit = repo_man.find_commit(page.relative_path)
 
-        unless commit.nil?
+        if commit.nil?
+          if fallback_to_mtime
+            path_page = Jekyll.sanitized_path(site.source, page.relative_path)
+
+            if File.file?(path_page)
+              page.data['last_modified_at'] = Time.at(File.mtime(path_page).to_i)
+            end
+          end
+
+        else
           raw_time = Time.at(commit["time"].to_i)
 
           page.data['last_commit'] = commit

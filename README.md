@@ -147,7 +147,7 @@ Added solely to be drop-in replacement with [gjtorikian/jekyll-last-modified-at]
 
 ## Date Format Directives
 
-See [Time.html#method-i-strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
+See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
 
 Selected format examples:
 

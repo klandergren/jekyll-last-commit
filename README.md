@@ -125,7 +125,7 @@ Default format: `%B %d, %Y`
 
 Example default output: `December 11, 2022`
 
-Specify in `_config.yml` via:
+Override in `_config.yml` via:
 
 ```
 jekyll-last-commit:

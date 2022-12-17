@@ -50,6 +50,9 @@ Its information can be accessed via:
 
 ## Documentation
 
+-   [`page.last_commit`](#pagelast_commit)
+    -   [`page.last_commit.committer`](#pagelast_commitcommitter)
+
 ### `page.last_commit`
 
 Gives access to the underlying rugged commit object.

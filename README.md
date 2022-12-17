@@ -2,9 +2,13 @@
 
 [Jekyll](https://jekyll.rb) plugin to access the last commit information for a file. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process. Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance.
 
-**Important: ignores commits where a file has been renamed without content changes**
-
 Especially useful to get `page.last_modified_at` for Jekyll sites with very large page counts (100s+).
+
+**Important:**
+
+- ignores commits where a file has been renamed without content changes
+- has not been tested on Windows
+- has not been tested extensively on old Jekyll versions
 
 ## Installation
 

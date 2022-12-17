@@ -41,8 +41,9 @@ Its information can be accessed via:
 | `{{ page.last_commit.committer.name }}` | Kip Landergren |
 | `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_commit.committer.email }}` | klandergren@users.noreply.github.com |
-| `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
+| `{{ page.last_modified_at }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
+| `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
 | `{% last_modified_at %}` | December 16, 2022 |
 | `{% last_modified_at %F %}` | 2022-12-16 |
 

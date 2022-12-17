@@ -34,7 +34,7 @@ Its information can be accessed via:
 
 | description | usage | rendered |
 | --- | --- | --- |
-| sha | `{{ page.last_commit.sha }}` | 5fde57927efdb2f440dd40c802687b60384e5d9d |
+| sha | `{{ page.last_commit.sha | slice: 0, 7 }}` | 5fde579 |
 | author name | `{{ page.last_commit.author.name }}` | Kip Landergren |
 | author time | `{{ page.last_commit.author.time }}` | 2022-12-16 18:30:53 -0800 |
 | author email | `{{ page.last_commit.author.email }}` | klandergren@users.noreply.github.com |

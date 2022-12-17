@@ -15,4 +15,4 @@ $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serv
 | case | baseline | jekyll-last-modified-at | jekyll-last-commit | improvement |
 | --- | --- | --- | --- | --- |
 | initial generation | 16.480 s | 79.601 s | 22.447 s | ~71% improvement |
-| subsequent generation (no --incremental) | 15.727 s | 78.200 s | ~73% improvement |  |
+| subsequent generation (no --incremental) | 15.727 s | 78.200 s | 20.739 s | ~73% improvement |  |

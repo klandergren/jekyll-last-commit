@@ -23,8 +23,11 @@ module JekyllLastCommit
             path_document = Jekyll.sanitized_path(site.source, document.relative_path)
 
             if File.file?(path_document)
+              raw_time = Time.at(File.mtime(path_document).to_i)
+
               Jekyll.logger.warn "JekyllLastCommit: unable to find commit information for #{document.relative_path}. falling back to `mtime` for last_modified_at"
-              document.data['last_modified_at'] = Time.at(File.mtime(path_document).to_i)
+              document.data['last_modified_at'] = raw_time
+              document.data['last_modified_at_formatted'] = raw_time.strftime(date_format)
             end
           end
         else
@@ -44,7 +47,9 @@ module JekyllLastCommit
             path_page = Jekyll.sanitized_path(site.source, page.relative_path)
 
             if File.file?(path_page)
-              page.data['last_modified_at'] = Time.at(File.mtime(path_page).to_i)
+              raw_time = Time.at(File.mtime(path_page).to_i)
+              page.data['last_modified_at'] = raw_time
+              page.data['last_modified_at_formatted'] = raw_time.strftime(date_format)
             end
           end
 

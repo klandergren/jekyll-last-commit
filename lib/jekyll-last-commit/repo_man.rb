@@ -19,7 +19,7 @@ module JekyllLastCommit
         # necessary to handle situations where site is not top level in repo
         @path_relative = @path_site.relative_path_from(path_repo)
 
-      rescue Rugged::OSError
+      rescue
         Jekyll.logger.warn "JekyllLastCommit: unable to find git repository at #{@path_site}"
       end
     end

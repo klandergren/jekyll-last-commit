@@ -32,19 +32,19 @@ add new pages to the site
 
 Its information can be accessed via:
 
-| description | usage | rendered |
-| --- | --- | --- |
-| sha | `{{ page.last_commit.sha \| slice: 0, 7 }}` | 5fde579 |
-| author name | `{{ page.last_commit.author.name }}` | Kip Landergren |
-| author time | `{{ page.last_commit.author.time }}` | 2022-12-16 18:30:53 -0800 |
-| author email | `{{ page.last_commit.author.email }}` | klandergren@users.noreply.github.com |
-| committer name | `{{ page.last_commit.committer.name }}` | Kip Landergren |
-| comitter time | `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
-| committer email | `{{ page.last_commit.committer.email }}` | klandergren@users.noreply.github.com |
-| last modified at (default / config-driven format) | `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
-| last modified at (custom format)  | `{{ page.last_modified_at | date: '%F' }}` | 2022-12-16 |
-| last modified at (liquid tag, default / config-driven format) | `{% last_modified_at %}` | December 16, 2022 |
-| last modified at (liquid tag, custom format) | `{% last_modified_at %F %}` | 2022-12-16 |
+| usage | rendered |
+| --- | --- |
+| `{{ page.last_commit.sha` | 5fde57927efdb2f440dd40c802687b60384e5d9d |
+| `{{ page.last_commit.author.name }}` | Kip Landergren |
+| `{{ page.last_commit.author.time }}` | 2022-12-16 18:30:53 -0800 |
+| `{{ page.last_commit.author.email }}` | klandergren@users.noreply.github.com |
+| `{{ page.last_commit.committer.name }}` | Kip Landergren |
+| `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
+| `{{ page.last_commit.committer.email }}` | klandergren@users.noreply.github.com |
+| `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
+| `{{ page.last_modified_at | date: '%F' }}` | 2022-12-16 |
+| `{% last_modified_at %}` | December 16, 2022 |
+| `{% last_modified_at %F %}` | 2022-12-16 |
 
 ## Documentation
 

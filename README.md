@@ -1,6 +1,215 @@
 # jekyll-last-commit
 
-[Jekyll](https://jekyll.rb) plugin to access the last commit information for a file. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process to query `git` repository information. Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance.
+[Jekyll](https://jekyll.rb) plugin to access the last commit information for a file. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process to access `git` repository information. Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance.
+
+Useful for Jekyll sites with very large page counts (100s+).
+
+## Installation
+
+Add to your `Gemfile`:
+
+```
+group :jekyll_plugins do
+  gem "jekyll-last-commit"
+end
+
+```
+
+and run `bundle install`.
+
+## Example Usage
+
+Last commit from a repo:
+
+```
+main 5fde57927efdb2f440dd40c802687b60384e5d9d
+Author:     Kip Landergren <klandergren@users.noreply.github.com>
+AuthorDate: Fri Dec 16 18:30:53 2022 -0800
+Commit:     Kip Landergren <klandergren@users.noreply.github.com>
+CommitDate: Fri Dec 16 18:30:53 2022 -0800
+
+add new pages to the site
+```
+
+HTML:
+
+```
+<section>
+  <h2>Usage</h2>
+  <table><tbody>
+    <tr>
+      <td>sha</td>
+      <td>{{ page.last_commit.sha }}</td>
+    </tr>
+    <tr>
+      <td>Author</td>
+      <td>{{ page.last_commit.author.name }}</td>
+    </tr>
+    <tr>
+      <td>Author Time</td>
+      <td>{{ page.last_commit.author.time }}</td>
+    </tr>
+    <tr>
+      <td>Author Email</td>
+      <td>{{ page.last_commit.author.email }}</td>
+    </tr>
+    <tr>
+      <td>Committer</td>
+      <td>{{ page.last_commit.committer.name }}</td>
+    </tr>
+    <tr>
+      <td>CommitterDate</td>
+      <td>{{ page.last_commit.committer.time }}</td>
+    </tr>
+    <tr>
+      <td>Committer Email</td>
+      <td>{{ page.last_commit.committer.email }}</td>
+    </tr>
+    <tr>
+      <td>Default Date Format</td>
+      <td>{{ page.last_modified_at_formatted }}</td>
+    </tr>
+    <tr>
+      <td>Custom Date Format</td>
+      <td>{{ page.last_modified_at | date '%F' }}</td>
+    </tr>
+    <tr>
+      <td>Default Liquid Tag</td>
+      <td>{% last_modified_at %}</td>
+    </tr>
+    <tr>
+      <td>Custom Date Format Liquid Tag</td>
+      <td>{% last_modified_at "%F" %}</td>
+    </tr>
+  </tbody></table>
+```
+
+Rendered:
+
+```
+<section>
+  <h2>Usage</h2>
+  <table><tbody>
+    <tr>
+      <td>sha</td>
+      <td>5fde57927efdb2f440dd40c802687b60384e5d9d</td>
+    </tr>
+    <tr>
+      <td>Author</td>
+      <td>Kip Landergren</td>
+    </tr>
+    <tr>
+      <td>Author Time</td>
+      <td>2022-12-16 18:30:53 -0800</td>
+    </tr>
+    <tr>
+      <td>Author Email</td>
+      <td>klandergren@users.noreply.github.com</td>
+    </tr>
+    <tr>
+      <td>Committer</td>
+      <td>Kip Landergren</td>
+    </tr>
+    <tr>
+      <td>CommitterDate</td>
+      <td>2022-12-16 18:30:53 -0800</td>
+    </tr>
+    <tr>
+      <td>Committer Email</td>
+      <td>klandergren@users.noreply.github.com</td>
+    </tr>
+  </tbody></table>
+
+</section>
+```
+
+## Documentation
+
+### `page.last_commit`
+
+Gives access to the underlying rugged commit object, with some minor modifications.
+
+Modifications:
+
+- key symbols replaced with strings (to prevent `liquid` exceptions)
+- field `tree` removed
+- field `parents` removed
+
+Fields available:
+
+| field | type | usage |
+| --- | --- | --- |
+| message | `String` | `{{ page.last_commit.message }}` |
+| sha | `String` | `{{ page.last_commit.sha }}` |
+| time | `Time` object | `{{ page.last_commit.time }}` |
+| time_epoch | `Integer` | `{{ page.last_commit.time_epoch }}` |
+| committer | `Hash` object | |
+| author | `Hash` object | |
+
+### `page.last_commit.committer`
+
+Information about the committer of the last commit for this file.
+
+Fields available:
+
+| field | type | usage |
+| --- | --- | --- |
+| name | `String` | `{{ page.last_commit.committer.name }}` |
+| email | `String` | `{{ page.last_commit.committer.email }}` |
+| time | `Time` object | `{{ page.last_commit.committer.time }}` |
+
+### `page.last_commit.author`
+
+Information about the author of the last commit for this file.
+
+Fields available:
+
+| field | type | usage |
+| --- | --- | --- |
+| name | `String` | `{{ page.last_commit.author.name }}` |
+| email | `String` | `{{ page.last_commit.author.email }}` |
+| time | `Time` object | `{{ page.last_commit.author.time }}` |
+
+### `page.last_modified_at`
+
+The `Time` object associated with the last commit for this file.
+
+Example default output: `2022-12-11 19:54:26 -0800`
+
+Use with liquid date filter:
+```
+{{ page.last_modified_at | date: '%B' }}
+```
+output:
+```
+December
+```
+
+### `page.last_modified_at_formatted`
+
+The formatted `string` of the `Time` object associated with the last commit for this file.
+
+Default format: `%B %d, %Y`
+
+Example default output: `December 11, 2022`
+
+Control via:
+
+```
+jekyll-last-commit:
+  date_format: '%F'
+```
+
+If you need a per-page date format, use `{{ page.last_modified_at | date '%F }}'` with whatever format string you want.
+
+### `last_modified_at`
+
+A liquid tag renders the formatted date using either the passed date format string, what was specified in `_config.yml`, or the default `%B %d, %Y`;
+
+```
+<p>{% last_modified_at %}</p>
+<p>{% last_modified_at "%F %D" %}</p>
+```
 
 ## Performance
 

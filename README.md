@@ -8,7 +8,6 @@ Especially useful to get `page.last_modified_at` for Jekyll sites with very larg
 
 - ignores commits where a file has been renamed without content changes
 - has not been tested on Windows
-- has not been tested extensively on old Jekyll versions
 
 ## Installation
 

@@ -42,6 +42,8 @@ Its information can be accessed via:
 | `{{ page.last_commit.committer.email }}` | klandergren@users.noreply.github.com |
 | `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_commit.message }}` | add new pages to the site |
+| `{{ page.last_commit.time }}` | 2022-12-16 18:30:53 -0800 |
+| `{{ page.last_commit.time_epoch }}` | 1671244253 |
 | `{{ page.last_modified_at }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
 | `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
@@ -51,37 +53,34 @@ Its information can be accessed via:
 ## Documentation
 
 -   [`page.last_commit`](#pagelast_commit)
+    -   [`page.last_commit.author`](#pagelast_commitauthor)
+        -   [`page.last_commit.author.email`](#pagelast_commitauthor)
+        -   [`page.last_commit.author.name`](#pagelast_commitauthor)
+        -   [`page.last_commit.author.time`](#pagelast_commitauthor)
     -   [`page.last_commit.committer`](#pagelast_commitcommitter)
+        -   [`page.last_commit.committer.email`](#pagelast_commitcommitter)
+        -   [`page.last_commit.committer.name`](#pagelast_commitcommitter)
+        -   [`page.last_commit.committer.time`](#pagelast_commitcommitter)
+    -   [`page.last_commit.message`](#pagelast_commit)
+    -   [`page.last_commit.sha`](#pagelast_commit)
+    -   [`page.last_commit.time`](#pagelast_commit)
+    -   [`page.last_commit.time_epoch`](#pagelast_commit)
+-   [`page.last_modified_at`](#pagelast_modified_at)
+-   [`page.last_modified_at_formatted`](#pagelast_modified_at_formatted)
+-   [`last_modified_at`](#last_modified_at)
 
 ### `page.last_commit`
 
-Gives access to the underlying rugged commit object.
+Gives access to the underlying rugged commit object information.
 
 | field | type | usage |
 | --- | --- | --- |
+| author | `Hash` object | see [`page.last_commit.author`](#pagelast_commitauthor) |
+| committer | `Hash` object | see [`page.last_commit.committer`](#pagelast_commitcommitter) |
 | message | `String` | `{{ page.last_commit.message }}` |
 | sha | `String` | `{{ page.last_commit.sha }}` |
 | time | `Time` object | `{{ page.last_commit.time }}` |
 | time_epoch | `Integer` | `{{ page.last_commit.time_epoch }}` |
-| committer | `Hash` object | see below |
-| author | `Hash` object | see below |
-
-Note:
-
-- key symbols replaced with strings (to prevent `liquid` exceptions)
-- field `time_epoch` is added
-- field `tree` removed
-- field `parents` removed
-
-### `page.last_commit.committer`
-
-Information about the committer of the last commit for this file.
-
-| field | type | usage |
-| --- | --- | --- |
-| name | `String` | `{{ page.last_commit.committer.name }}` |
-| email | `String` | `{{ page.last_commit.committer.email }}` |
-| time | `Time` object | `{{ page.last_commit.committer.time }}` |
 
 ### `page.last_commit.author`
 
@@ -92,6 +91,16 @@ Information about the author of the last commit for this file.
 | name | `String` | `{{ page.last_commit.author.name }}` |
 | email | `String` | `{{ page.last_commit.author.email }}` |
 | time | `Time` object | `{{ page.last_commit.author.time }}` |
+
+### `page.last_commit.committer`
+
+Information about the committer of the last commit for this file.
+
+| field | type | usage |
+| --- | --- | --- |
+| name | `String` | `{{ page.last_commit.committer.name }}` |
+| email | `String` | `{{ page.last_commit.committer.email }}` |
+| time | `Time` object | `{{ page.last_commit.committer.time }}` |
 
 ### `page.last_modified_at`
 
@@ -163,3 +172,7 @@ See [improving render performance via PATH_CACHE usage and bulk git log ... call
 ### Why not fork gjtorikian/jekyll-last-modified-at ?
 
 Grabbing data via [libgit2/rugged](https://github.com/libgit2/rugged) would be too big of a rewrite for what is a very popular plugin. If folks have performance issues getting `page.last_modified_at` they can safely compare their options using this!
+
+### Will this work with GitHub Pages?
+
+I don’t think so: my understanding is that GitHub Pages performs a shallow clone. I have not tried!

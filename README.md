@@ -12,7 +12,6 @@ Add to your `Gemfile`:
 group :jekyll_plugins do
   gem "jekyll-last-commit"
 end
-
 ```
 
 and run `bundle install`.
@@ -143,15 +142,7 @@ Rendered:
 
 ### `page.last_commit`
 
-Gives access to the underlying rugged commit object, with some minor modifications.
-
-Modifications:
-
-- key symbols replaced with strings (to prevent `liquid` exceptions)
-- field `tree` removed
-- field `parents` removed
-
-Fields available:
+Gives access to the underlying rugged commit object.
 
 | field | type | usage |
 | --- | --- | --- |
@@ -162,11 +153,15 @@ Fields available:
 | committer | `Hash` object | |
 | author | `Hash` object | |
 
+Note:
+
+- key symbols replaced with strings (to prevent `liquid` exceptions)
+- field `tree` removed
+- field `parents` removed
+
 ### `page.last_commit.committer`
 
 Information about the committer of the last commit for this file.
-
-Fields available:
 
 | field | type | usage |
 | --- | --- | --- |
@@ -177,8 +172,6 @@ Fields available:
 ### `page.last_commit.author`
 
 Information about the author of the last commit for this file.
-
-Fields available:
 
 | field | type | usage |
 | --- | --- | --- |

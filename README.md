@@ -88,8 +88,8 @@ Information about the author of the last commit for this file.
 
 | field | type | usage |
 | --- | --- | --- |
-| name | `String` | `{{ page.last_commit.author.name }}` |
 | email | `String` | `{{ page.last_commit.author.email }}` |
+| name | `String` | `{{ page.last_commit.author.name }}` |
 | time | `Time` object | `{{ page.last_commit.author.time }}` |
 
 ### `page.last_commit.committer`
@@ -98,8 +98,8 @@ Information about the committer of the last commit for this file.
 
 | field | type | usage |
 | --- | --- | --- |
-| name | `String` | `{{ page.last_commit.committer.name }}` |
 | email | `String` | `{{ page.last_commit.committer.email }}` |
+| name | `String` | `{{ page.last_commit.committer.name }}` |
 | time | `Time` object | `{{ page.last_commit.committer.time }}` |
 
 ### `page.last_modified_at`

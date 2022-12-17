@@ -36,11 +36,12 @@ Its information can be accessed via:
 | --- | --- |
 | `{{ page.last_commit.sha }}` | 5fde57927efdb2f440dd40c802687b60384e5d9d |
 | `{{ page.last_commit.author.name }}` | Kip Landergren |
-| `{{ page.last_commit.author.time }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_commit.author.email }}` | klandergren@users.noreply.github.com |
+| `{{ page.last_commit.author.time }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_commit.committer.name }}` | Kip Landergren |
-| `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_commit.committer.email }}` | klandergren@users.noreply.github.com |
+| `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
+| `{{ page.last_commit.message }}` | add new pages to the site |
 | `{{ page.last_modified_at }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
 | `{{ page.last_modified_at_formatted }}` | December 16, 2022 |

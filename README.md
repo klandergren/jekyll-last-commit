@@ -140,7 +140,7 @@ A liquid tag that renders the formatted date using either the passed date format
 
 ```
 <p>{% last_modified_at %}</p>
-<p>{% last_modified_at "%F %D" %}</p>
+<p>{% last_modified_at %F %D %}</p>
 ```
 
 Added solely to be drop-in replacement with [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at).
@@ -153,6 +153,7 @@ Selected format examples:
 
 | format | example output |
 | --- | --- |
+| default (`%B %d, %Y`), via `{{ page.last_modified_at_formatted }}` | December 11, 2022 |
 | `{{ page.last_modified_at \| date: '%c' }}` | Fri Dec 16 18:30:53 2022 |
 | `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
 | `{{ page.last_modified_at \| date: '%D' }}` | 12/16/22 |

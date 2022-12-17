@@ -30,113 +30,21 @@ CommitDate: Fri Dec 16 18:30:53 2022 -0800
 add new pages to the site
 ```
 
-We can then access commit data within our site content:
+Its information can be accessed via:
 
-```
-<section>
-  <h2>Usage</h2>
-  <table><tbody>
-    <tr>
-      <td>sha</td>
-      <td>{{ page.last_commit.sha }}</td>
-    </tr>
-    <tr>
-      <td>Author</td>
-      <td>{{ page.last_commit.author.name }}</td>
-    </tr>
-    <tr>
-      <td>Author Time</td>
-      <td>{{ page.last_commit.author.time }}</td>
-    </tr>
-    <tr>
-      <td>Author Email</td>
-      <td>{{ page.last_commit.author.email }}</td>
-    </tr>
-    <tr>
-      <td>Committer</td>
-      <td>{{ page.last_commit.committer.name }}</td>
-    </tr>
-    <tr>
-      <td>CommitterDate</td>
-      <td>{{ page.last_commit.committer.time }}</td>
-    </tr>
-    <tr>
-      <td>Committer Email</td>
-      <td>{{ page.last_commit.committer.email }}</td>
-    </tr>
-    <tr>
-      <td>Default Date Format</td>
-      <td>{{ page.last_modified_at_formatted }}</td>
-    </tr>
-    <tr>
-      <td>Custom Date Format</td>
-      <td>{{ page.last_modified_at | date: '%F' }}</td>
-    </tr>
-    <tr>
-      <td>Default Liquid Tag</td>
-      <td>{% last_modified_at %}</td>
-    </tr>
-    <tr>
-      <td>Custom Date Format Liquid Tag</td>
-      <td>{% last_modified_at "%F" %}</td>
-    </tr>
-  </tbody></table>
-</section>
-```
-
-Rendered:
-
-```
-<section>
-  <h2>Usage</h2>
-  <table><tbody>
-    <tr>
-      <td>sha</td>
-      <td>5fde57927efdb2f440dd40c802687b60384e5d9d</td>
-    </tr>
-    <tr>
-      <td>Author</td>
-      <td>Kip Landergren</td>
-    </tr>
-    <tr>
-      <td>Author Time</td>
-      <td>2022-12-16 18:30:53 -0800</td>
-    </tr>
-    <tr>
-      <td>Author Email</td>
-      <td>klandergren@users.noreply.github.com</td>
-    </tr>
-    <tr>
-      <td>Committer</td>
-      <td>Kip Landergren</td>
-    </tr>
-    <tr>
-      <td>CommitterDate</td>
-      <td>2022-12-16 18:30:53 -0800</td>
-    </tr>
-    <tr>
-      <td>Committer Email</td>
-      <td>klandergren@users.noreply.github.com</td>
-    </tr>
-    <tr>
-      <td>Default Date Format</td>
-      <td>December 16, 2022</td>
-    </tr>
-    <tr>
-      <td>Custom Date Format</td>
-      <td>2022-12-16</td>
-    </tr>
-    <tr>
-      <td>Default Liquid Tag</td>
-      <td>December 16, 2022</td>
-    </tr>
-    <tr>
-      <td>Custom Date Format Liquid Tag</td>
-      <td>"2022-12-16"</td>
-    </tr>
-  </tbody></table>
-</section>
-```
+| description | usage | rendered |
+| --- | --- | --- |
+| sha | `{{ page.last_commit.sha }}` | 5fde57927efdb2f440dd40c802687b60384e5d9d |
+| author name | `{{ page.last_commit.author.name }}` | Kip Landergren |
+| author time | `{{ page.last_commit.author.time }}` | 2022-12-16 18:30:53 -0800 |
+| author email | `{{ page.last_commit.author.email }}` | klandergren@users.noreply.github.com |
+| committer name | `{{ page.last_commit.committer.name }}` | Kip Landergren |
+| comitter time | `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
+| committer email | `{{ page.last_commit.committer.email }}` | klandergren@users.noreply.github.com |
+| last modified at (default / config-driven format) | `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
+| last modified at (custom format)  | `{{ page.last_modified_at | date: '%F' }}` | 2022-12-16 |
+| last modified at (liquid tag, default / config-driven format) | `{% last_modified_at %}` | December 16, 2022 |
+| last modified at (liquid tag, custom format) | `{% last_modified_at %F %}` | 2022-12-16 |
 
 ## Documentation
 
@@ -156,6 +64,7 @@ Gives access to the underlying rugged commit object.
 Note:
 
 - key symbols replaced with strings (to prevent `liquid` exceptions)
+- field `time_epoch` is added
 - field `tree` removed
 - field `parents` removed
 

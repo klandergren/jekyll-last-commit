@@ -153,13 +153,13 @@ Selected format examples:
 
 | format | example output |
 | --- | --- |
-| `{{ page.last_modified_at | date: '%c' }}` | Fri Dec 16 18:30:53 2022 |
-| `{{ page.last_modified_at | date: '%F' }}` | 2022-12-16 |
-| `{{ page.last_modified_at | date: '%D' }}` | 12/16/22 |
-| `{{ page.last_modified_at | date: '%v' }}` | 16-DEC-2022 |
-| `{{ page.last_modified_at | date: '%r' }}` | 06:30:53 PM |
-| `{{ page.last_modified_at | date: '%R' }}` | 18:30 |
-| `{{ page.last_modified_at | date: '%T' }}` | 18:30:53 |
+| `{{ page.last_modified_at \| date: '%c' }}` | Fri Dec 16 18:30:53 2022 |
+| `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
+| `{{ page.last_modified_at \| date: '%D' }}` | 12/16/22 |
+| `{{ page.last_modified_at \| date: '%v' }}` | 16-DEC-2022 |
+| `{{ page.last_modified_at \| date: '%r' }}` | 06:30:53 PM |
+| `{{ page.last_modified_at \| date: '%R' }}` | 18:30 |
+| `{{ page.last_modified_at \| date: '%T' }}` | 18:30:53 |
 
 
 ## Performance

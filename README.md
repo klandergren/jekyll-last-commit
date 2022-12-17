@@ -150,8 +150,8 @@ Gives access to the underlying rugged commit object.
 | sha | `String` | `{{ page.last_commit.sha }}` |
 | time | `Time` object | `{{ page.last_commit.time }}` |
 | time_epoch | `Integer` | `{{ page.last_commit.time_epoch }}` |
-| committer | `Hash` object | |
-| author | `Hash` object | |
+| committer | `Hash` object | see below |
+| author | `Hash` object | see below |
 
 Note:
 
@@ -185,7 +185,7 @@ The `Time` object associated with the last commit for this file.
 
 Example default output: `2022-12-11 19:54:26 -0800`
 
-Use with liquid date filter:
+Can be formatted using a liquid `date` filter:
 ```
 {{ page.last_modified_at | date: '%B' }}
 ```
@@ -196,13 +196,13 @@ December
 
 ### `page.last_modified_at_formatted`
 
-The formatted `string` of the `Time` object associated with the last commit for this file.
+The formatted `string` of the `Time` object associated with the last commit for this file. Format controlled via `_config.yml`.
 
 Default format: `%B %d, %Y`
 
 Example default output: `December 11, 2022`
 
-Control via:
+Specify in `_config.yml` via:
 
 ```
 jekyll-last-commit:
@@ -213,12 +213,14 @@ If you need a per-page date format, use `{{ page.last_modified_at | date: '%F }}
 
 ### `last_modified_at`
 
-A liquid tag renders the formatted date using either the passed date format string, what was specified in `_config.yml`, or the default `%B %d, %Y`;
+A liquid tag that renders the formatted date using either the passed date format string, what was specified in `_config.yml`, or the default `%B %d, %Y`:
 
 ```
 <p>{% last_modified_at %}</p>
 <p>{% last_modified_at "%F %D" %}</p>
 ```
+
+Added solely to be drop-in replacement with [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at).
 
 ## Performance
 
@@ -242,8 +244,8 @@ $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serv
 
 ### Why not just improve gjtorikian/jekyll-last-modified-at ?
 
-I did! I have two open PRs which take an approach more in line with that codebase’s architecture and conventions. See [improving render performance via PATH_CACHE usage and bulk git log ... call #85](https://github.com/gjtorikian/jekyll-last-modified-at/issues/85)
+See [improving render performance via PATH_CACHE usage and bulk git log ... call #85](https://github.com/gjtorikian/jekyll-last-modified-at/issues/85) which includes two PRs more in line with that repository’s architecture and conventions.
 
 ### Why not fork gjtorikian/jekyll-last-modified-at ?
 
-I realized that all the information I wanted could be grabbed via [libgit2/rugged](https://github.com/libgit2/rugged) and not involve a complete rewrite of a very popular plugin. If folks have performance issues they can safely compare their options using this!
+Grabbing data via [libgit2/rugged](https://github.com/libgit2/rugged) would be too big of a rewrite for what is a very popular plugin. If folks have performance issues getting `page.last_modified_at` they can safely compare their options using this!

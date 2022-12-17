@@ -13,7 +13,7 @@ Especially useful to get `page.last_modified_at` for Jekyll sites with very larg
 
 Add to your `Gemfile`:
 
-```
+```ruby
 group :jekyll_plugins do
   gem "jekyll-last-commit"
 end
@@ -24,7 +24,7 @@ and run `bundle install`.
 ## Configuration
 
 All of the following are optional:
-```
+```yml
 jekyll-last-commit:
   date_format: '%F'        # default: `%B %d, %Y`
   # if a commit is not found `File.mtime` is used
@@ -163,7 +163,7 @@ Example default output: `December 11, 2022`
 
 Override in `_config.yml` via:
 
-```
+```yml
 jekyll-last-commit:
   date_format: '%F'
 ```
@@ -174,7 +174,7 @@ If you need a per-page date format, use `{{ page.last_modified_at | date: '%F }}
 
 A liquid tag that renders the formatted date using either the passed date format string, what was specified in `_config.yml`, or the default `%B %d, %Y`:
 
-```
+```html
 <p>{% last_modified_at %}</p>
 <p>{% last_modified_at %F %D %}</p>
 ```
@@ -189,7 +189,7 @@ Comparison made to [gjtorikian/jekyll-last-modified-at](https://github.com/gjtor
 
 generation command (note: no use of `---incremental`):
 
-```
+```shell
 $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serve --port 4001 --source ./static-site --destination /tmp/_site_development
 ```
 

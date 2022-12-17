@@ -2,7 +2,7 @@
 
 [Jekyll](https://jekyll.rb) plugin to access the last commit information for a file. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process to access `git` repository information. Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance.
 
-Useful for Jekyll sites with very large page counts (100s+).
+Especially useful to get `page.last_modified_at` for Jekyll sites with very large page counts (100s+).
 
 ## Installation
 
@@ -19,7 +19,7 @@ and run `bundle install`.
 
 ## Example Usage
 
-Last commit from a repo:
+The following is the last (most recent) commit from a repo:
 
 ```
 main 5fde57927efdb2f440dd40c802687b60384e5d9d
@@ -31,7 +31,7 @@ CommitDate: Fri Dec 16 18:30:53 2022 -0800
 add new pages to the site
 ```
 
-HTML:
+We can then access commit data within our site content:
 
 ```
 <section>
@@ -71,7 +71,7 @@ HTML:
     </tr>
     <tr>
       <td>Custom Date Format</td>
-      <td>{{ page.last_modified_at | date '%F' }}</td>
+      <td>{{ page.last_modified_at | date: '%F' }}</td>
     </tr>
     <tr>
       <td>Default Liquid Tag</td>
@@ -82,6 +82,7 @@ HTML:
       <td>{% last_modified_at "%F" %}</td>
     </tr>
   </tbody></table>
+</section>
 ```
 
 Rendered:
@@ -118,8 +119,23 @@ Rendered:
       <td>Committer Email</td>
       <td>klandergren@users.noreply.github.com</td>
     </tr>
+    <tr>
+      <td>Default Date Format</td>
+      <td>December 16, 2022</td>
+    </tr>
+    <tr>
+      <td>Custom Date Format</td>
+      <td>2022-12-16</td>
+    </tr>
+    <tr>
+      <td>Default Liquid Tag</td>
+      <td>December 16, 2022</td>
+    </tr>
+    <tr>
+      <td>Custom Date Format Liquid Tag</td>
+      <td>"2022-12-16"</td>
+    </tr>
   </tbody></table>
-
 </section>
 ```
 
@@ -200,7 +216,7 @@ jekyll-last-commit:
   date_format: '%F'
 ```
 
-If you need a per-page date format, use `{{ page.last_modified_at | date '%F }}'` with whatever format string you want.
+If you need a per-page date format, use `{{ page.last_modified_at | date: '%F }}'` with whatever format string you want.
 
 ### `last_modified_at`
 

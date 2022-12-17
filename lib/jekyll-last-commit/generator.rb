@@ -9,10 +9,10 @@ module JekyllLastCommit
       repo_man.discover_commits(site.documents.map {|d| d.relative_path })
       repo_man.discover_commits(site.pages.map {|p| p.relative_path })
 
-      date_format = site.config.dig('jekyll-last-commit', 'date-format')
+      date_format = site.config.dig('jekyll-last-commit', 'date_format')
       date_format ||= '%B %d, %Y'
 
-      fallback_to_mtime = site.config.dig('jekyll-last-commit', 'fallback-to-mtime')
+      fallback_to_mtime = site.config.dig('jekyll-last-commit', 'fallback_to_mtime')
       fallback_to_mtime = fallback_to_mtime.nil? ? true : false
 
       site.documents.each do |document|

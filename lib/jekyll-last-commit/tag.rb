@@ -18,7 +18,7 @@ module JekyllLastCommit
     def default_date_format(context)
       site = context.registers[:site]
 
-      date_format = site.config.dig('jekyll-last-commit', 'date-format')
+      date_format = site.config.dig('jekyll-last-commit', 'date_format')
       date_format ||= '%B %d, %Y'
 
       date_format

@@ -50,6 +50,23 @@ Its information can be accessed via:
 | `{% last_modified_at %}` | December 16, 2022 |
 | `{% last_modified_at %F %}` | 2022-12-16 |
 
+## Date Format Directives
+
+See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
+
+Selected format examples:
+
+| format | example output |
+| --- | --- |
+| default (`%B %d, %Y`), via `{{ page.last_modified_at_formatted }}` | December 11, 2022 |
+| `{{ page.last_modified_at \| date: '%c' }}` | Fri Dec 16 18:30:53 2022 |
+| `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
+| `{{ page.last_modified_at \| date: '%D' }}` | 12/16/22 |
+| `{{ page.last_modified_at \| date: '%v' }}` | 16-DEC-2022 |
+| `{{ page.last_modified_at \| date: '%r' }}` | 06:30:53 PM |
+| `{{ page.last_modified_at \| date: '%R' }}` | 18:30 |
+| `{{ page.last_modified_at \| date: '%T' }}` | 18:30:53 |
+
 ## Documentation
 
 -   [`page.last_commit`](#pagelast_commit)
@@ -145,24 +162,6 @@ A liquid tag that renders the formatted date using either the passed date format
 
 Added solely to be drop-in replacement with [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at).
 
-## Date Format Directives
-
-See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
-
-Selected format examples:
-
-| format | example output |
-| --- | --- |
-| default (`%B %d, %Y`), via `{{ page.last_modified_at_formatted }}` | December 11, 2022 |
-| `{{ page.last_modified_at \| date: '%c' }}` | Fri Dec 16 18:30:53 2022 |
-| `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
-| `{{ page.last_modified_at \| date: '%D' }}` | 12/16/22 |
-| `{{ page.last_modified_at \| date: '%v' }}` | 16-DEC-2022 |
-| `{{ page.last_modified_at \| date: '%r' }}` | 06:30:53 PM |
-| `{{ page.last_modified_at \| date: '%R' }}` | 18:30 |
-| `{{ page.last_modified_at \| date: '%T' }}` | 18:30:53 |
-
-
 ## Performance
 
 Comparison made to [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at)
@@ -179,7 +178,6 @@ $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serv
 | --- | --- | --- | --- | --- |
 | initial generation | 16.480 s | 79.601 s | 22.447 s | ~71% improvement |
 | subsequent generation | 15.727 s | 78.200 s | 20.739 s | ~73% improvement |  |
-
 
 ## FAQ
 

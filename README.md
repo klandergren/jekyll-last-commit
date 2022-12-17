@@ -168,7 +168,7 @@ Added solely to be drop-in replacement with [gjtorikian/jekyll-last-modified-at]
 
 ## Performance
 
-Comparison made to [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at)
+Comparison made to [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) on a 2017 MacBook Pro running a 3.1 GHz Quad-Core Intel Core i7
 
 ### site with ~1400 pages
 

@@ -12,14 +12,14 @@ module JekyllLastCommit
       date_format = site.config.dig('jekyll-last-commit', 'date_format')
       date_format ||= '%B %d, %Y'
 
-      fallback_to_mtime = site.config.dig('jekyll-last-commit', 'fallback_to_mtime')
-      fallback_to_mtime = fallback_to_mtime.nil? ? true : false
+      should_fall_back_to_mtime = site.config.dig('jekyll-last-commit', 'should_fall_back_to_mtime')
+      should_fall_back_to_mtime = should_fall_back_to_mtime.nil? ? true : should_fall_back_to_mtime
 
       site.documents.each do |document|
         commit = repo_man.find_commit(document.relative_path)
 
         if commit.nil?
-          if fallback_to_mtime
+          if should_fall_back_to_mtime
             path_document = Jekyll.sanitized_path(site.source, document.relative_path)
 
             if File.file?(path_document)
@@ -40,7 +40,7 @@ module JekyllLastCommit
         commit = repo_man.find_commit(page.relative_path)
 
         if commit.nil?
-          if fallback_to_mtime
+          if should_fall_back_to_mtime
             path_page = Jekyll.sanitized_path(site.source, page.relative_path)
 
             if File.file?(path_page)

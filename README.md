@@ -22,6 +22,18 @@ end
 
 and run `bundle install`.
 
+## Configuration
+
+All of the following are optional:
+```
+jekyll-last-commit:
+  date_format: '%F'        # default: `%B %d, %Y`
+  # if a commit is not found `File.mtime` is used
+  should_fall_back_to_mtime: false # default: `true`
+```
+
+The use case for `should_fall_back_to_mtime` is so that rendering of a file that is not yet tracked by `git` looks correct (e.g. a new, uncommitted blog post).
+
 ## Example Usage
 
 The following is the last (most recent) commit from a repo:

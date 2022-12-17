@@ -24,7 +24,7 @@ $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serv
 
 ### Why not just improve gjtorikian/jekyll-last-modified-at ?
 
-I did! I have two open PRs which take an approach more inline with that existing codebase. See [improving render performance via PATH_CACHE usage and bulk git log ... call #85](https://github.com/gjtorikian/jekyll-last-modified-at/issues/85)
+I did! I have two open PRs which take an approach more in line with that codebase’s architecture and conventions. See [improving render performance via PATH_CACHE usage and bulk git log ... call #85](https://github.com/gjtorikian/jekyll-last-modified-at/issues/85)
 
 ### Why not fork gjtorikian/jekyll-last-modified-at ?
 

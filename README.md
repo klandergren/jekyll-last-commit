@@ -5,7 +5,7 @@
 Use cases:
 
 - accessing the last commit date for a site page or document
-- getting the committer for a site page or document
+- getting the last committer name or email for a site page or document
 - performant access to `page.last_modified_at` for Jekyll sites with very large page counts (100s+)
 
 Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process.
@@ -14,30 +14,6 @@ Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github
 
 - ignores commits where a file has been renamed without content changes
 - has not been tested on Windows
-
-## Installation
-
-Add to your `Gemfile`:
-
-```ruby
-group :jekyll_plugins do
-  gem "jekyll-last-commit"
-end
-```
-
-and run `bundle install`.
-
-## Configuration
-
-All of the following are optional:
-```yml
-jekyll-last-commit:
-  date_format: '%F'        # default: `%B %d, %Y`
-  # if a commit is not found `File.mtime` is used
-  should_fall_back_to_mtime: false # default: `true`
-```
-
-The use case for `should_fall_back_to_mtime` is so that rendering of a file that is not yet tracked by `git` looks correct (e.g. a new, uncommitted blog post).
 
 ## Example Usage
 
@@ -72,6 +48,30 @@ Its information can be accessed via:
 | `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
 | `{% last_modified_at %}` | December 16, 2022 |
 | `{% last_modified_at %F %}` | 2022-12-16 |
+
+## Installation
+
+Add to your `Gemfile`:
+
+```ruby
+group :jekyll_plugins do
+  gem "jekyll-last-commit"
+end
+```
+
+and run `bundle install`.
+
+## Configuration
+
+All of the following are optional:
+```yml
+jekyll-last-commit:
+  date_format: '%F'        # default: `%B %d, %Y`
+  # if a commit is not found `File.mtime` is used
+  should_fall_back_to_mtime: false # default: `true`
+```
+
+The use case for `should_fall_back_to_mtime` is so that rendering of a file that is not yet tracked by `git` looks correct (e.g. a new, uncommitted blog post).
 
 ## Date Format Directives
 

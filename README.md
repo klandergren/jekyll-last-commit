@@ -10,10 +10,6 @@ Use cases:
 
 Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process.
 
-## How It Works
-
-Walks the commit history until all documents and pages are matched to a commit. Falls back to `File.mtime` when no commit found. Runs fresh on each site generation.
-
 **Important:**
 
 - ignores commits where a file has been renamed without content changes
@@ -207,6 +203,10 @@ $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serv
 | --- | --- | --- | --- | --- |
 | initial generation | 16.480 s | 79.601 s | 22.447 s | ~71% improvement |
 | subsequent generation | 15.727 s | 78.200 s | 20.739 s | ~73% improvement |  |
+
+## How It Works
+
+Walks the commit history until all documents and pages are matched to a commit. Falls back to `File.mtime` when no commit found. Runs fresh on each site generation.
 
 ## FAQ
 

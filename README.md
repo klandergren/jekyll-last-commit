@@ -8,7 +8,7 @@ Use cases:
 - getting the last committer name or email for a site page or document
 - performant access to `page.last_modified_at` for Jekyll sites with very large page counts (100s+)
 
-Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process.
+Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process. Walks the commit history until all documents and pages are matched to a commit.
 
 **Important:**
 

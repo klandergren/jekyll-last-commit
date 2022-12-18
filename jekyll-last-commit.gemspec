@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.email       = 'kip@kip.land'
   s.license     = "MIT"
   s.homepage    = 'https://github.com/klandergren/jekyll-last-commit'
-  s.files       = ["lib/jekyll-last-commit.rb"]
+  s.files       = Dir['lib/**/*.rb']
 
   s.add_runtime_dependency "jekyll", '>= 3.7', ' < 5.0'
   s.add_runtime_dependency "rugged", '~> 1.1'

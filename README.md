@@ -1,37 +1,19 @@
 # jekyll-last-commit
 
-[Jekyll](https://jekyll.rb) plugin to access the last commit information for a file. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process. Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance.
+[Jekyll](https://jekyll.rb) [generator plugin](https://jekyllrb.com/docs/plugins/generators/) and [liquid tag](https://jekyllrb.com/docs/plugins/tags/) to access the last commit information for a file.
 
-Especially useful to get `page.last_modified_at` for Jekyll sites with very large page counts (100s+).
+Use cases:
+
+- accessing the last commit date for a site page or document
+- getting the last committer name or email for a site page or document
+- performant access to `page.last_modified_at` for Jekyll sites with very large page counts (100s+)
+
+Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process.
 
 **Important:**
 
 - ignores commits where a file has been renamed without content changes
 - has not been tested on Windows
-
-## Installation
-
-Add to your `Gemfile`:
-
-```ruby
-group :jekyll_plugins do
-  gem "jekyll-last-commit"
-end
-```
-
-and run `bundle install`.
-
-## Configuration
-
-All of the following are optional:
-```yml
-jekyll-last-commit:
-  date_format: '%F'        # default: `%B %d, %Y`
-  # if a commit is not found `File.mtime` is used
-  should_fall_back_to_mtime: false # default: `true`
-```
-
-The use case for `should_fall_back_to_mtime` is so that rendering of a file that is not yet tracked by `git` looks correct (e.g. a new, uncommitted blog post).
 
 ## Example Usage
 
@@ -67,11 +49,35 @@ Its information can be accessed via:
 | `{% last_modified_at %}` | December 16, 2022 |
 | `{% last_modified_at %F %}` | 2022-12-16 |
 
+## Installation
+
+Add to your `Gemfile`:
+
+```ruby
+group :jekyll_plugins do
+  gem "jekyll-last-commit"
+end
+```
+
+and run `bundle install`.
+
+## Configuration
+
+All of the following are optional:
+```yml
+jekyll-last-commit:
+  date_format: '%F'        # default: `%B %d, %Y`
+  # if a commit is not found `File.mtime` is used
+  should_fall_back_to_mtime: false # default: `true`
+```
+
+The use case for `should_fall_back_to_mtime` is so that rendering of a file that is not yet tracked by `git` looks correct (e.g. a new, uncommitted blog post).
+
 ## Date Format Directives
 
 See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
 
-Selected format examples:
+### Examples
 
 | format | example output |
 | --- | --- |
@@ -197,6 +203,10 @@ $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serv
 | --- | --- | --- | --- | --- |
 | initial generation | 16.480 s | 79.601 s | 22.447 s | ~71% improvement |
 | subsequent generation | 15.727 s | 78.200 s | 20.739 s | ~73% improvement |  |
+
+## How It Works
+
+Walks the commit history until all documents and pages are matched to a commit. Falls back to `File.mtime` when no commit found. Runs fresh on each site generation.
 
 ## FAQ
 

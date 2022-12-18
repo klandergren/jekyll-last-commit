@@ -77,7 +77,7 @@ The use case for `should_fall_back_to_mtime` is so that rendering of a file that
 
 See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
 
-Selected format examples:
+### Examples
 
 | format | example output |
 | --- | --- |

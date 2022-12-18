@@ -1,6 +1,6 @@
 # jekyll-last-commit
 
-[Jekyll](https://jekyll.rb) plugin to access the last commit information for a file.
+[Jekyll](https://jekyll.rb) [generator plugin](https://jekyllrb.com/docs/plugins/generators/) and [liquid tag](https://jekyllrb.com/docs/plugins/tags/) to access the last commit information for a file.
 
 Use cases:
 
@@ -8,7 +8,11 @@ Use cases:
 - getting the last committer name or email for a site page or document
 - performant access to `page.last_modified_at` for Jekyll sites with very large page counts (100s+)
 
-Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process. Walks the commit history until all documents and pages are matched to a commit.
+Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process.
+
+## How It Works
+
+Walks the commit history until all documents and pages are matched to a commit. Falls back to `File.mtime` when no commit found. Runs fresh on each site generation.
 
 **Important:**
 

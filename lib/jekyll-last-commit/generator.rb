@@ -26,8 +26,8 @@ module JekyllLastCommit
       date_format = site.config.dig('jekyll-last-commit', 'date_format')
       date_format ||= '%B %d, %Y'
 
-      data_file_key = site.config.dig('jekyll-last-commit', 'data_files_key')
-      data_file_key ||= 'meta'
+      data_files_key = site.config.dig('jekyll-last-commit', 'data_files_key')
+      data_files_key ||= 'meta'
 
       should_fall_back_to_mtime = site.config.dig('jekyll-last-commit', 'should_fall_back_to_mtime')
       should_fall_back_to_mtime = should_fall_back_to_mtime.nil? ? true : should_fall_back_to_mtime
@@ -55,9 +55,9 @@ module JekyllLastCommit
         end
       end
 
-      site.data[data_file_key] = {}
+      site.data[data_files_key] = {}
       data_files.each do |data_file|
-        site.data[data_file_key][data_file] = {}
+        site.data[data_files_key][data_file] = {}
 
         relative_path = './_data/' + data_file
         commit = repo_man.find_commit(relative_path)
@@ -68,15 +68,15 @@ module JekyllLastCommit
 
             if File.file?(data_file)
               raw_time = Time.at(File.mtime(path_data_file).to_i)
-              site.data[data_file_key][data_file]['last_modified_at'] = raw_time
-              site.data[data_file_key][data_file]['last_modified_at_formatted'] = raw_time.strftime(date_format)
+              site.data[data_files_key][data_file]['last_modified_at'] = raw_time
+              site.data[data_files_key][data_file]['last_modified_at_formatted'] = raw_time.strftime(date_format)
             end
           end
         else
           raw_time = Time.at(commit['time'].to_i)
-          site.data[data_file_key][data_file]['last_commit'] = commit
-          site.data[data_file_key][data_file]['last_modified_at'] = raw_time
-          site.data[data_file_key][data_file]['last_modified_at_formatted'] = raw_time.strftime(date_format)
+          site.data[data_files_key][data_file]['last_commit'] = commit
+          site.data[data_files_key][data_file]['last_modified_at'] = raw_time
+          site.data[data_files_key][data_file]['last_modified_at_formatted'] = raw_time.strftime(date_format)
         end
       end
 

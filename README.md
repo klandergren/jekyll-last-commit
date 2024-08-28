@@ -68,9 +68,12 @@ and run `bundle install`.
 All of the following are optional:
 ```yml
 jekyll-last-commit:
-  date_format: '%F'        # default: `%B %d, %Y`
+  date_format: '%F'                # default: `%B %d, %Y`
   # if a commit is not found `File.mtime` is used
   should_fall_back_to_mtime: false # default: `true`
+  # enable processing of data and static files
+  index_data_files: true           # default: false
+  index_static_files: true         # default: false
   # information about data files is stored in a seperate site.data hash
   data_files_key: 'meta'           # default: meta
 ```

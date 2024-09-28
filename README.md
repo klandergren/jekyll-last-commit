@@ -114,9 +114,9 @@ See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) docu
     -   [`page.last_commit.time_epoch`](#pagelast_commit)
 -   [`page.last_modified_at`](#pagelast_modified_at)
 -   [`page.last_modified_at_formatted`](#pagelast_modified_at_formatted)
--   [`site.data.meta\[data_file\]last_commit`](#sitedatametadata_filelast_commit)
--   [`site.data.meta\[data_file\]last_modified_at`](#sitedatametadata_filelast_modified_at)
--   [`site.data.meta\[data_file\]last_modified_at_formatted`](#sitedatametadata_filelast_modified_at_formatted)
+-   [`site.data.meta[data_file].last_commit`](#sitedatametadata_filelast_commit)
+-   [`site.data.meta[data_file].last_modified_at`](#sitedatametadata_filelast_modified_at)
+-   [`site.data.meta[data_file].last_modified_at_formatted`](#sitedatametadata_filelast_modified_at_formatted)
 -   [`last_modified_at`](#last_modified_at)
 
 ### `page.last_commit`

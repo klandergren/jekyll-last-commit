@@ -46,8 +46,10 @@ Its information can be accessed via:
 | `{{ page.last_modified_at }}` | 2022-12-16 18:30:53 -0800 |
 | `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
 | `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
+| `{{ site.data.meta[data_file].last_modified_at_formatted }}` | December 16, 2022 |
 | `{% last_modified_at %}` | December 16, 2022 |
 | `{% last_modified_at %F %}` | 2022-12-16 |
+
 
 ## Installation
 
@@ -66,9 +68,14 @@ and run `bundle install`.
 All of the following are optional:
 ```yml
 jekyll-last-commit:
-  date_format: '%F'        # default: `%B %d, %Y`
+  date_format: '%F'                # default: `%B %d, %Y`
   # if a commit is not found `File.mtime` is used
   should_fall_back_to_mtime: false # default: `true`
+  # enable processing of data and static files
+  index_data_files: true           # default: false
+  index_static_files: true         # default: false
+  # information about data files is stored in a seperate site.data hash
+  data_files_key: 'meta'           # default: meta
 ```
 
 The use case for `should_fall_back_to_mtime` is so that rendering of a file that is not yet tracked by `git` looks correct (e.g. a new, uncommitted blog post).
@@ -76,6 +83,10 @@ The use case for `should_fall_back_to_mtime` is so that rendering of a file that
 ## Date Format Directives
 
 See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
+
+### Data files
+
+Information about data files is stored in `site.data.meta`. The name of the key in `site.data` can be configured in `_config.yml`.
 
 ### Examples
 

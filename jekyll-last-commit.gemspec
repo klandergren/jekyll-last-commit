@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'jekyll-last-commit'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.summary     = "Jekyll plugin to access the last git commit for a file."
   s.description = "Gives access to a file's most recent commit date, message, sha, and author/committer information."
   s.authors     = ["Kip Landergren"]

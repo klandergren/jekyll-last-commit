@@ -2,11 +2,12 @@
 
 [Jekyll](https://jekyll.rb) [generator plugin](https://jekyllrb.com/docs/plugins/generators/) and [liquid tag](https://jekyllrb.com/docs/plugins/tags/) to access the last commit information for a file.
 
-Use cases:
+Provides performant access to `page.last_modified_at` for Jekyll sites with very large page counts (100s+).
 
-- accessing the last commit date for a site page or document
-- getting the last committer name or email for a site page or document
-- performant access to `page.last_modified_at` for Jekyll sites with very large page counts (100s+)
+Use cases for a site page, document, static file, or data file:
+
+- accessing the last commit date
+- accessing the last committer name, email, and other metadata
 
 Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) and aimed at improved performance. Seeks to be drop-in replacement. Uses [libgit2/rugged](https://github.com/libgit2/rugged) rather than spawning a process.
 
@@ -31,25 +32,24 @@ add new pages to the site
 
 Its information can be accessed via:
 
-| usage | rendered |
-| --- | --- |
-| `{{ page.last_commit.sha }}` | 5fde57927efdb2f440dd40c802687b60384e5d9d |
-| `{{ page.last_commit.author.name }}` | Kip Landergren |
-| `{{ page.last_commit.author.email }}` | klandergren@users.noreply.github.com |
-| `{{ page.last_commit.author.time }}` | 2022-12-16 18:30:53 -0800 |
-| `{{ page.last_commit.committer.name }}` | Kip Landergren |
-| `{{ page.last_commit.committer.email }}` | klandergren@users.noreply.github.com |
-| `{{ page.last_commit.committer.time }}` | 2022-12-16 18:30:53 -0800 |
-| `{{ page.last_commit.message }}` | add new pages to the site |
-| `{{ page.last_commit.time }}` | 2022-12-16 18:30:53 -0800 |
-| `{{ page.last_commit.time_epoch }}` | 1671244253 |
-| `{{ page.last_modified_at }}` | 2022-12-16 18:30:53 -0800 |
-| `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
-| `{{ page.last_modified_at_formatted }}` | December 16, 2022 |
-| `{{ site.data.meta[data_file].last_modified_at_formatted }}` | December 16, 2022 |
-| `{% last_modified_at %}` | December 16, 2022 |
-| `{% last_modified_at %F %}` | 2022-12-16 |
-
+| usage                                                        | rendered                                 |
+|--------------------------------------------------------------|------------------------------------------|
+| `{{ page.last_commit.sha }}`                                 | 5fde57927efdb2f440dd40c802687b60384e5d9d |
+| `{{ page.last_commit.author.name }}`                         | Kip Landergren                           |
+| `{{ page.last_commit.author.email }}`                        | klandergren@users.noreply.github.com     |
+| `{{ page.last_commit.author.time }}`                         | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_commit.committer.name }}`                      | Kip Landergren                           |
+| `{{ page.last_commit.committer.email }}`                     | klandergren@users.noreply.github.com     |
+| `{{ page.last_commit.committer.time }}`                      | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_commit.message }}`                             | add new pages to the site                |
+| `{{ page.last_commit.time }}`                                | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_commit.time_epoch }}`                          | 1671244253                               |
+| `{{ page.last_modified_at }}`                                | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_modified_at \| date: '%F' }}`                  | 2022-12-16                               |
+| `{{ page.last_modified_at_formatted }}`                      | December 16, 2022                        |
+| `{{ site.data.meta[data_file].last_modified_at_formatted }}` | December 16, 2022                        |
+| `{% last_modified_at %}`                                     | December 16, 2022                        |
+| `{% last_modified_at %F %}`                                  | 2022-12-16                               |
 
 ## Installation
 
@@ -74,7 +74,7 @@ jekyll-last-commit:
   # enable processing of data and static files
   index_data_files: true           # default: false
   index_static_files: true         # default: false
-  # information about data files is stored in a seperate site.data hash
+  # information about data files is stored in a separate site.data hash
   data_files_key: 'meta'           # default: meta
 ```
 
@@ -84,22 +84,18 @@ The use case for `should_fall_back_to_mtime` is so that rendering of a file that
 
 See [Time#strftime](https://ruby-doc.org/3.1.3/Time.html#method-i-strftime) documentation for available date format directives.
 
-### Data files
-
-Information about data files is stored in `site.data.meta`. The name of the key in `site.data` can be configured in `_config.yml`.
-
 ### Examples
 
-| format | example output |
-| --- | --- |
-| default (`%B %d, %Y`), via `{{ page.last_modified_at_formatted }}` | December 11, 2022 |
-| `{{ page.last_modified_at \| date: '%c' }}` | Fri Dec 16 18:30:53 2022 |
-| `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16 |
-| `{{ page.last_modified_at \| date: '%D' }}` | 12/16/22 |
-| `{{ page.last_modified_at \| date: '%v' }}` | 16-DEC-2022 |
-| `{{ page.last_modified_at \| date: '%r' }}` | 06:30:53 PM |
-| `{{ page.last_modified_at \| date: '%R' }}` | 18:30 |
-| `{{ page.last_modified_at \| date: '%T' }}` | 18:30:53 |
+| format                                                             | example output           |
+|--------------------------------------------------------------------|--------------------------|
+| default (`%B %d, %Y`), via `{{ page.last_modified_at_formatted }}` | December 11, 2022        |
+| `{{ page.last_modified_at \| date: '%c' }}`                        | Fri Dec 16 18:30:53 2022 |
+| `{{ page.last_modified_at \| date: '%F' }}`                        | 2022-12-16               |
+| `{{ page.last_modified_at \| date: '%D' }}`                        | 12/16/22                 |
+| `{{ page.last_modified_at \| date: '%v' }}`                        | 16-DEC-2022              |
+| `{{ page.last_modified_at \| date: '%r' }}`                        | 06:30:53 PM              |
+| `{{ page.last_modified_at \| date: '%R' }}`                        | 18:30                    |
+| `{{ page.last_modified_at \| date: '%T' }}`                        | 18:30:53                 |
 
 ## Documentation
 
@@ -118,6 +114,9 @@ Information about data files is stored in `site.data.meta`. The name of the key 
     -   [`page.last_commit.time_epoch`](#pagelast_commit)
 -   [`page.last_modified_at`](#pagelast_modified_at)
 -   [`page.last_modified_at_formatted`](#pagelast_modified_at_formatted)
+-   [`site.data.meta\[data_file\]last_commit`](#sitedatametadata_filelast_commit)
+-   [`site.data.meta\[data_file\]last_modified_at`](#sitedatametadata_filelast_modified_at)
+-   [`site.data.meta\[data_file\]last_modified_at_formatted`](#sitedatametadata_filelast_modified_at_formatted)
 -   [`last_modified_at`](#last_modified_at)
 
 ### `page.last_commit`
@@ -126,34 +125,34 @@ Gives access to the underlying rugged commit object information.
 
 **Important: ignores commits where a file has been renamed without content changes**
 
-| field | type | usage |
-| --- | --- | --- |
-| author | `Hash` object | see [`page.last_commit.author`](#pagelast_commitauthor) |
-| committer | `Hash` object | see [`page.last_commit.committer`](#pagelast_commitcommitter) |
-| message | `String` | `{{ page.last_commit.message }}` |
-| sha | `String` | `{{ page.last_commit.sha }}` |
-| time | `Time` object | `{{ page.last_commit.time }}` |
-| time_epoch | `Integer` | `{{ page.last_commit.time_epoch }}` |
+| field      | type          | usage                                                         |
+|------------|---------------|---------------------------------------------------------------|
+| author     | `Hash` object | see [`page.last_commit.author`](#pagelast_commitauthor)       |
+| committer  | `Hash` object | see [`page.last_commit.committer`](#pagelast_commitcommitter) |
+| message    | `String`      | `{{ page.last_commit.message }}`                              |
+| sha        | `String`      | `{{ page.last_commit.sha }}`                                  |
+| time       | `Time` object | `{{ page.last_commit.time }}`                                 |
+| time_epoch | `Integer`     | `{{ page.last_commit.time_epoch }}`                           |
 
 ### `page.last_commit.author`
 
 Information about the author of the last commit for this file.
 
-| field | type | usage |
-| --- | --- | --- |
-| email | `String` | `{{ page.last_commit.author.email }}` |
-| name | `String` | `{{ page.last_commit.author.name }}` |
-| time | `Time` object | `{{ page.last_commit.author.time }}` |
+| field | type          | usage                                 |
+|-------|---------------|---------------------------------------|
+| email | `String`      | `{{ page.last_commit.author.email }}` |
+| name  | `String`      | `{{ page.last_commit.author.name }}`  |
+| time  | `Time` object | `{{ page.last_commit.author.time }}`  |
 
 ### `page.last_commit.committer`
 
 Information about the committer of the last commit for this file.
 
-| field | type | usage |
-| --- | --- | --- |
-| email | `String` | `{{ page.last_commit.committer.email }}` |
-| name | `String` | `{{ page.last_commit.committer.name }}` |
-| time | `Time` object | `{{ page.last_commit.committer.time }}` |
+| field | type          | usage                                    |
+|-------|---------------|------------------------------------------|
+| email | `String`      | `{{ page.last_commit.committer.email }}` |
+| name  | `String`      | `{{ page.last_commit.committer.name }}`  |
+| time  | `Time` object | `{{ page.last_commit.committer.time }}`  |
 
 ### `page.last_modified_at`
 
@@ -187,6 +186,27 @@ jekyll-last-commit:
 
 If you need a per-page date format, use `{{ page.last_modified_at | date: '%F }}'` with whatever format string you want.
 
+### `site.data.meta[data_file].last_commit`
+
+* `data_file` is the name of the file within `_data/`, e.g. `foo.json`
+* `.yml`, `.yaml`, `.json`, `.tsv`, and `.csv` supported
+
+See [`page.last_commit`](#pagelast_commit) for further information.
+
+### `site.data.meta[data_file].last_modified_at`
+
+* `data_file` is the name of the file within `_data/`, e.g. `foo.json`
+* `.yml`, `.yaml`, `.json`, `.tsv`, and `.csv` supported
+
+See [`page.last_modified_at`](#pagelast_modified_at) for further information.
+
+### `site.data.meta[data_file].last_modified_at_formatted`
+
+* `data_file` is the name of the file within `_data/`, e.g. `foo.json`
+* `.yml`, `.yaml`, `.json`, `.tsv`, and `.csv` supported
+
+See [`page.last_modified_at_formatted`](#pagelast_modified_at_formatted) for further information.
+
 ### `last_modified_at`
 
 A liquid tag that renders the formatted date using either the passed date format string, what was specified in `_config.yml`, or the default `%B %d, %Y`:
@@ -210,10 +230,10 @@ generation command (note: no use of `---incremental`):
 $ JEKYLL_ENV=development bundle exec --gemfile=./static-site/Gemfile jekyll serve --port 4001 --source ./static-site --destination /tmp/_site_development
 ```
 
-| case | baseline | jekyll-last-modified-at | jekyll-last-commit | improvement |
-| --- | --- | --- | --- | --- |
-| initial generation | 16.480 s | 79.601 s | 22.447 s | ~71% improvement |
-| subsequent generation | 15.727 s | 78.200 s | 20.739 s | ~73% improvement |  |
+| case                  | baseline | jekyll-last-modified-at | jekyll-last-commit | improvement      |
+|-----------------------|----------|-------------------------|--------------------|------------------|
+| initial generation    | 16.480 s | 79.601 s                | 22.447 s           | ~71% improvement |
+| subsequent generation | 15.727 s | 78.200 s                | 20.739 s           | ~73% improvement |
 
 ## How It Works
 

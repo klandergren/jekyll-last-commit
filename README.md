@@ -30,26 +30,45 @@ CommitDate: Fri Dec 16 18:30:53 2022 -0800
 add new pages to the site
 ```
 
-Its information can be accessed via:
+Every page that was created or modified by this commit will get access to the commit’s information:
 
-| usage                                                        | rendered                                 |
-|--------------------------------------------------------------|------------------------------------------|
-| `{{ page.last_commit.sha }}`                                 | 5fde57927efdb2f440dd40c802687b60384e5d9d |
-| `{{ page.last_commit.author.name }}`                         | Kip Landergren                           |
-| `{{ page.last_commit.author.email }}`                        | klandergren@users.noreply.github.com     |
-| `{{ page.last_commit.author.time }}`                         | 2022-12-16 18:30:53 -0800                |
-| `{{ page.last_commit.committer.name }}`                      | Kip Landergren                           |
-| `{{ page.last_commit.committer.email }}`                     | klandergren@users.noreply.github.com     |
-| `{{ page.last_commit.committer.time }}`                      | 2022-12-16 18:30:53 -0800                |
-| `{{ page.last_commit.message }}`                             | add new pages to the site                |
-| `{{ page.last_commit.time }}`                                | 2022-12-16 18:30:53 -0800                |
-| `{{ page.last_commit.time_epoch }}`                          | 1671244253                               |
-| `{{ page.last_modified_at }}`                                | 2022-12-16 18:30:53 -0800                |
-| `{{ page.last_modified_at \| date: '%F' }}`                  | 2022-12-16                               |
-| `{{ page.last_modified_at_formatted }}`                      | December 16, 2022                        |
-| `{{ site.data.meta[data_file].last_modified_at_formatted }}` | December 16, 2022                        |
-| `{% last_modified_at %}`                                     | December 16, 2022                        |
-| `{% last_modified_at %F %}`                                  | 2022-12-16                               |
+| usage                                       | rendered                                 |
+|---------------------------------------------|------------------------------------------|
+| `{{ page.last_commit.sha }}`                | 5fde57927efdb2f440dd40c802687b60384e5d9d |
+| `{{ page.last_commit.author.name }}`        | Kip Landergren                           |
+| `{{ page.last_commit.author.email }}`       | klandergren@users.noreply.github.com     |
+| `{{ page.last_commit.author.time }}`        | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_commit.committer.name }}`     | Kip Landergren                           |
+| `{{ page.last_commit.committer.email }}`    | klandergren@users.noreply.github.com     |
+| `{{ page.last_commit.committer.time }}`     | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_commit.message }}`            | add new pages to the site                |
+| `{{ page.last_commit.time }}`               | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_commit.time_epoch }}`         | 1671244253                               |
+| `{{ page.last_modified_at }}`               | 2022-12-16 18:30:53 -0800                |
+| `{{ page.last_modified_at \| date: '%F' }}` | 2022-12-16                               |
+| `{{ page.last_modified_at_formatted }}`     | December 16, 2022                        |
+| `{% last_modified_at %}`                    | December 16, 2022                        |
+| `{% last_modified_at %F %}`                 | 2022-12-16                               |
+
+Additionally, last commit info is accessible for any data file via `site.data.meta[data_file]` with the same API:
+
+| usage                                                            | rendered                                 |
+|------------------------------------------------------------------|------------------------------------------|
+| `{{ site.data.meta[data_file].last_commit.sha }}`                | 5fde57927efdb2f440dd40c802687b60384e5d9d |
+| `{{ site.data.meta[data_file].last_commit.author.name }}`        | Kip Landergren                           |
+| `{{ site.data.meta[data_file].last_commit.author.email }}`       | klandergren@users.noreply.github.com     |
+| `{{ site.data.meta[data_file].last_commit.author.time }}`        | 2022-12-16 18:30:53 -0800                |
+| `{{ site.data.meta[data_file].last_commit.committer.name }}`     | Kip Landergren                           |
+| `{{ site.data.meta[data_file].last_commit.committer.email }}`    | klandergren@users.noreply.github.com     |
+| `{{ site.data.meta[data_file].last_commit.committer.time }}`     | 2022-12-16 18:30:53 -0800                |
+| `{{ site.data.meta[data_file].last_commit.message }}`            | add new pages to the site                |
+| `{{ site.data.meta[data_file].last_commit.time }}`               | 2022-12-16 18:30:53 -0800                |
+| `{{ site.data.meta[data_file].last_commit.time_epoch }}`         | 1671244253                               |
+| `{{ site.data.meta[data_file].last_modified_at }}`               | 2022-12-16 18:30:53 -0800                |
+| `{{ site.data.meta[data_file].last_modified_at \| date: '%F' }}` | 2022-12-16                               |
+| `{{ site.data.meta[data_file].last_modified_at_formatted }}`     | December 16, 2022                        |
+
+Every page has their own last commit info computed during rebuild.
 
 ## Installation
 

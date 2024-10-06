@@ -15,6 +15,8 @@ Inspired by the work done at [gjtorikian/jekyll-last-modified-at](https://github
 
 - ignores commits where a file has been renamed without content changes
 - has not been tested on Windows
+- if your git repo [uses SHA-256](https://git-scm.com/docs/hash-function-transition): the version of [<samp>libgit2</samp>](https://github.com/libgit2/libgit2) that [<samp>rugged</samp>](https://github.com/libgit2/rugged) uses must also support SHA-256
+  - as of 2024 October, for the current <samp>libgit2</samp> stable release [v1.8.1](https://github.com/libgit2/libgit2/releases), that means building <samp>libgit2</samp> with [<samp>-DEXPERIMENTAL_SHA256</samp>](https://github.com/libgit2/libgit2/blob/main/cmake/ExperimentalFeatures.cmake)
 
 ## Example Usage
 

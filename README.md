@@ -272,4 +272,13 @@ Grabbing data via [libgit2/rugged](https://github.com/libgit2/rugged) would be t
 
 ### Will this work with GitHub Pages?
 
-I don’t think so: my understanding is that GitHub Pages performs a shallow clone. I have not tried!
+1. It does not work with the old-style GitHub Pages integration, which doesn't allow third-party plugins.
+2. It does not work with GitHub's https://github.com/actions/jekyll-build-pages action, which does not allow third-party gems either.
+3. It works with the official [Jekyll GitHub Action](https://jekyllrb.com/docs/continuous-integration/github-actions/) but needs you to configure the `actions/checkout` step with `fetch-depth` of 0 to ensure all Git history is fetched.
+
+```yaml
+ - name: Checkout
+    uses: actions/checkout@v4
+    with:
+      fetch-depth: 0
+```

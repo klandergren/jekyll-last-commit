@@ -282,3 +282,19 @@ Grabbing data via [libgit2/rugged](https://github.com/libgit2/rugged) would be t
     with:
       fetch-depth: 0
 ```
+
+## Release Instructions
+
+preflight:
+
+* bump version in file `jekyll-last-commit.gemspec`
+* commit changes
+* tag with same version
+* ensure commit and tag pushed to GitHub
+
+build and push:
+
+```text
+gem build jekyll-last-commit.gemspec
+gem push jekyll-last-commit-X.Y.Z.gem
+```
